@@ -6,6 +6,16 @@ import 'dotenv/config';
 
 const app = express();
 
-app.listen(process.env.PORT || 3001, () => {
-    console.log(`Servidor corriendo en http://localhost:${process.env.PORT}`)
+import { env } from "./src/settings/envs.js"
+
+//Middlewares
+app.use(express.json());
+app.use(cors());
+app.use(morgan('dev'));
+app.use(helmet({
+    contentSecurityPolicy: false
+}))
+
+app.listen(env.PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${env.PORT}`)
 })
